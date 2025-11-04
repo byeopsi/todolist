@@ -1,0 +1,138 @@
+*, html {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.container .todo-container {
+  height: 80%;
+  width: 50%;
+  background-color: rgb(235, 235, 235);
+  border-radius: 15px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgb(235, 235, 235);
+}
+.container .todo-container .header {
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  text-align: center;
+  flex-basis: 10%;
+  padding: 1vw 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.container .todo-container .header span {
+  display: block;
+  width: 100%;
+  flex-basis: 0;
+  flex-shrink: 1;
+  font-size: 2.5vw;
+}
+.container .todo-container .header img {
+  width: 6vw;
+  flex-shrink: 1;
+  height: auto;
+}
+.container .todo-container .content {
+  overflow-y: scroll;
+  flex-basis: 70%;
+}
+.container .todo-container .content ul {
+  padding: 2vw 1vw;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5vh;
+  font-size: 1rem;
+}
+.container .todo-container .content ul li {
+  list-style: none;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+}
+.container .todo-container .content ul li .todo {
+  border: 1px solid rgb(235, 235, 235);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1vw;
+  padding: 0.5vh;
+}
+.container .todo-container .content ul li .todo span {
+  flex-basis: 85%;
+  display: block;
+}
+.container .todo-container .content ul li .todo input {
+  flex-shrink: 0;
+  flex-grow: 0;
+  appearance: none;
+  width: 2rem;
+  min-width: 2rem;
+  height: 2rem;
+  min-height: 2rem;
+  border-radius: 50%;
+  border: 1px solid rgb(200, 200, 200);
+  cursor: pointer;
+}
+.container .todo-container .content ul li .todo input:checked {
+  background-color: rgb(200, 200, 200);
+  border-color: rgb(200, 200, 200);
+  outline: none;
+}
+.container .todo-container .content ul li .todo button {
+  width: 2rem;
+  min-width: 2rem;
+  height: 2rem;
+  min-height: 2rem;
+  border: none;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  cursor: pointer;
+  outline: none;
+}
+.container .todo-container .content ul li .done {
+  background-color: rgb(235, 235, 235);
+  border: 1px solid white;
+}
+.container .todo-container .content ul li .done span {
+  color: rgb(200, 200, 200);
+  text-decoration: line-through rgb(200, 200, 200);
+}
+.container .todo-container .content ul li .done button {
+  background-color: rgb(235, 235, 235);
+  border: 1px solid rgb(200, 200, 200);
+}
+.container .todo-container .add-container {
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  flex-basis: 20%;
+  display: flex;
+  flex-direction: row;
+  padding: 1vw;
+}
+.container .todo-container .add-container textarea {
+  font-size: 1rem;
+  resize: none;
+  flex-basis: 90%;
+  outline: none;
+  border: 1px solid rgb(200, 200, 200);
+}
+.container .todo-container .add-container input {
+  flex-basis: 10%;
+  background-color: rgb(235, 235, 235);
+  border: 1px solid rgb(200, 200, 200);
+  border-left: none;
+}

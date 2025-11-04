@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css" />
+  <title>GANADI TODO</title>
+</head>
+<body>
+  <div class="container">
+    <div class="todo-container">
+      <div class="header">
+        <span>
+          TODOS
+        </span>
+        <img src="assets/ganadi.png" />
+      </div>
+      <div class="content">
+        <ul class="content-ul">
+          <li>
+            <div class="todo done">
+              <span>할 일 1</span>
+              <input class="chk" type="checkbox" name="todo" id="todo-0">
+              <button class="deleteBtn">X</button>
+            </div>
+          </li>
+          <li>
+            <div class="todo">
+              <span>할 일 2입니다 글자가 길어지면 어떻게 되는지 보려고 하고 있습니다 글자가 길어지면 어떻게 되는지 보려고 하고 있습니다 글자가 길어지면 어떻게 되는지 보려고 하고 있습니다</span>
+              <input class="chk" type="checkbox" name="todo" id="todo-1">
+              <button class="deleteBtn" type="button">X</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="add-container">
+        <textarea name="todo-text" id="todoText"></textarea>
+        <input id="addBtn" type="button" value="추가">
+      </div>
+    </div>
+  </div>
+  <script>
+    let todoNum;
+    document.addEventListener("DOMContentLoaded", function(){
+      let todos = document.querySelectorAll(".todo");
+      todoNum = todos.length;
+    })
+    
+    // 투두 추가
+    const addBtn = document.querySelector("#addBtn");
+    addBtn.addEventListener("click", () => {
+      let todoTextarea = document.querySelector("#todoText")
+      let todoText = todoTextarea.value
+      if(todoText == "" || todoText.trim().length == 0){
+        alert("내용을 입력해주세요!");
+        return
+      }  
+      
+      // 엘리먼트 생성 및 수정
+      const li = document.createElement("li");
+      const div = document.createElement("div");
+      const span = document.createElement("span")
+      const input = document.createElement("input");
+      const button = document.createElement("button");
+      
+      div.classList.add("todo");
+      span.textContent = todoText;
+      input.type = "checkbox";
+      input.name = "todo";
+      todoNum += 1;
+      input.id = "todo-" + todoNum
+      input.classList.add("chk");
+      button.textContent = "X";
+      button.classList.add("deleteBtn");
+      
+      // 조합
+      div.appendChild(span);
+      div.appendChild(input);
+      div.appendChild(button);
+      li.appendChild(div);
+      
+      // 뷰 변경
+      const ul = document.querySelector(".content-ul");
+      ul.appendChild(li);
+      todoTextarea.value = '';
+      
+      // 이벤트 리스너 추가
+      input.addEventListener("click", () => {
+        let todoDiv = input.parentNode;
+        let checked = todoDiv.classList.contains("done");
+        if(checked){
+          todoDiv.classList.remove("done");
+        } else {
+          todoDiv.classList.add("done");
+        }
+      })
+      
+      // 스크롤 이동
+      const contentDiv = document.querySelector(".content");
+      contentDiv.scrollTo({top: contentDiv.scrollHeight, behavior: "smooth"});
+    })
+    
+    // 투두 완료/재수행
+  let chks = document.querySelectorAll(".chk");
+  chks.forEach((chk)=>{
+    chk.addEventListener("click", () => {
+      let todoDiv = chk.parentNode;
+      let checked = todoDiv.classList.contains("done");
+      if(checked){
+        todoDiv.classList.remove("done");
+      } else {
+        todoDiv.classList.add("done");
+      }
+    })
+  });
+
+  // 투두 삭제
+  const contentUl = document.querySelector(".content-ul");
+  let deleteBtns = document.querySelectorAll(".deleteBtn");
+  deleteBtns.forEach((deleteBtn) => {
+    let todoLi = deleteBtn.parentNode.parentNode;
+    deleteBtn.addEventListener("click", () => {
+      if(confirm("할 일을 삭제하시겠습니까?")){
+        contentUl.removeChild(todoLi);
+        // 투두 seq 재정렬
+      }
+    })
+  })
+  </script>
+</body>
+</html>
