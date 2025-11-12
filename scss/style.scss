@@ -95,8 +95,6 @@ $colors : (
               cursor: pointer;
               
               &:checked {
-                background-color: map-get($colors, bd);
-                border-color: map-get($colors, bd);
                 outline: none;
               }
 

@@ -88,8 +88,6 @@
   cursor: pointer;
 }
 .container .todo-container .content ul li .todo input:checked {
-  background-color: rgb(200, 200, 200);
-  border-color: rgb(200, 200, 200);
   outline: none;
 }
 .container .todo-container .content ul li .todo button {
