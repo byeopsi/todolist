@@ -104,6 +104,21 @@ const createTodoListItem = (todoData, key) => {
     }
     
     li.classList.remove("drag-over");
+
+    let soundsArr = [
+      {
+        'name': 'assets/sound/멍.mp3',
+        'volume': 0.4
+      },
+      {
+        'name': 'assets/sound/냥.mp3',
+        'volume': 0.5
+      }
+    ]
+    let num = Math.floor(Math.random() * 2); // 0~1
+    let audio = new Audio(soundsArr[num]['name']);
+    audio.volume = soundsArr[num]['volume'];
+    audio.play();
   })
 
   return li;
