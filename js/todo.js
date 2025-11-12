@@ -3,6 +3,7 @@ let todoText = "";
 let doneYn = "";
 
 const createTodoListItem = (todoData, key) => {
+  let ul = document.querySelector(".content-ul");
   let li = document.createElement("li");
   let div = document.createElement("div");
   let span = document.createElement("span")
@@ -12,6 +13,8 @@ const createTodoListItem = (todoData, key) => {
   div.classList.add("todo");
   if(todoData.doneYn == "Y"){
     div.classList.add("done");
+  } else {
+    li.setAttribute("draggable", "true");
   }
   span.textContent = todoData.todoText;
   input.type = "checkbox";
@@ -51,11 +54,57 @@ const createTodoListItem = (todoData, key) => {
   // 투두 삭제 이벤트 리스너 추가
   button.addEventListener("click", () => {
     if (confirm("할 일을 삭제하시겠습니까?")) {
-      let ul = document.querySelector(".content-ul");
       ul.removeChild(li);
       localStorage.removeItem(key);
     }
   });
+
+  // 드래그 이벤트 리스너 추가
+  li.addEventListener("dragstart", (event) => {
+    event.dataTransfer.effectAllowed = "move";
+    event.dataTransfer.setData("text/html", li.innerHTML);
+    li.classList.add('dragging');
+  })
+
+  li.addEventListener("dragend", () => {
+    li.classList.remove("dragging");
+  })
+
+  li.addEventListener("dragover", (event) => {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = "move";
+    
+    // 드래그 중인 항목과 다른 항목 위에서만 시각적 표시
+    const allLis = ul.querySelectorAll("li");
+    allLis.forEach(item => item.classList.remove("drag-over"));
+    
+    if(li.classList.contains("dragging")) return;
+    li.classList.add("drag-over");
+  })
+
+  li.addEventListener("dragleave", () => {
+    li.classList.remove("drag-over");
+  })
+
+  li.addEventListener("drop", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    const draggedLi = ul.querySelector(".dragging");
+    if(draggedLi && draggedLi !== li) {
+      // 마우스 Y 위치가 타겟 li의 중간보다 아래면 이후에, 위면 이전에 삽입
+      const rect = li.getBoundingClientRect();
+      const midpoint = rect.top + rect.height / 2;
+      
+      if(event.clientY > midpoint) {
+        li.parentNode.insertBefore(draggedLi, li.nextSibling);
+      } else {
+        li.parentNode.insertBefore(draggedLi, li);
+      }
+    }
+    
+    li.classList.remove("drag-over");
+  })
 
   return li;
 }

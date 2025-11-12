@@ -113,6 +113,14 @@
   background-color: rgb(235, 235, 235);
   border: 1px solid rgb(200, 200, 200);
 }
+.container .todo-container .content ul li.dragging {
+  opacity: 0.5;
+  background-color: #bbbbbb;
+}
+.container .todo-container .content ul li.drag-over {
+  border-top: 2px solid #5a5a5a;
+  padding-top: 5px;
+}
 .container .todo-container .add-container {
   width: 100%;
   background-color: rgb(255, 255, 255);

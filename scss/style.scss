@@ -125,6 +125,16 @@ $colors : (
               border: 1px solid map-get($colors, bd);
             }
           }
+
+          &.dragging {
+            opacity: 0.5;
+            background-color: #bbbbbb;
+          }
+
+          &.drag-over {
+            border-top: 2px solid #5a5a5a;
+            padding-top: 5px;
+          }
         }
       }
     }
