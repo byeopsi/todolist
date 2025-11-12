@@ -2,22 +2,21 @@ let todoNum = 0;
 let todoText = "";
 let doneYn = "";
 
-// 공통: todo 항목(li) 생성 및 이벤트 바인딩
 const createTodoListItem = (todoData, key) => {
   let li = document.createElement("li");
   let div = document.createElement("div");
-  let span = document.createElement("span");
+  let span = document.createElement("span")
   let input = document.createElement("input");
   let button = document.createElement("button");
 
   div.classList.add("todo");
-  if (todoData.doneYn == "Y") {
+  if(todoData.doneYn == "Y"){
     div.classList.add("done");
   }
   span.textContent = todoData.todoText;
   input.type = "checkbox";
   input.name = "todo";
-  input.id = "todo-" + todoData.todoNum;
+  input.id = "todo-" + todoData.todoNum
   input.classList.add("chk");
   button.textContent = "X";
   button.classList.add("deleteBtn");
@@ -28,7 +27,7 @@ const createTodoListItem = (todoData, key) => {
   div.appendChild(button);
   li.appendChild(div);
 
-  // 투두 완료 이벤트 리스너 추가
+  // 투두완료 이벤트 리스너 추가
   input.addEventListener("click", () => {
     let todoDiv = input.parentNode;
     let checked = todoDiv.classList.contains("done");
@@ -60,6 +59,7 @@ const createTodoListItem = (todoData, key) => {
 
   return li;
 }
+
 // 저장된 투두 가져와서 정렬
 const reloadTodo = () => {
   let ul = document.querySelector(".content-ul");
